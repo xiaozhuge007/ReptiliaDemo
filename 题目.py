@@ -127,5 +127,4 @@ if __name__ == '__main__':
     mt = Question()
     # mt.getQ()
     # mt.getLink()
-    # mt.start()
-    mt.getQid()
+    mt.start()
