@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # __author__ = 'zhudewei'
 import os
+import time
 from pyspider.libs.base_handler import *
 
 DIR = r'C:\Users\zhudw\Desktop\android\123'  # 目录
@@ -23,15 +24,15 @@ class Handler(BaseHandler):
     def on_start(self):
         """
         /makePaper?source=1&tagIds=617&difficulty=5&questionCount=30
+                tagIds=569 类型id 例如 安卓 是617
                difficulty=5 代表5星
         """
-        n = 0
-        while n < self.max:
-            n += 1
-            difficulty = 3  # 3星 题目难度 1~5星
+        for i in range(1, 5):
+            difficulty = i  # 3星 题目难度 1~5星
             final_url = self.baseUrl + "/makePaper?source=1&tagIds=569&difficulty=%s&questionCount=30" % str(difficulty)
             self.crawl(final_url, callback=self.get_links, fetch_type='js', headers=self.heard, method='post',
                        validate_cert=False)
+            time.sleep(0.5)
 
     @config(age=10 * 24 * 60 * 60)
     def get_links(self, response):
